@@ -12,11 +12,29 @@ struct DetailViewCards: View {
     @State var items: [Item]
     @State var restaurantName: String
     
+    
+    
     var body: some View {
+        let itemsG = 1...50
+
+        let rows = [
+            GridItem(.fixed(50)),
+           // GridItem(.fixed(50))
+        ]
         
         VStack{
             TopBar(restaurante: restaurantName)
             
+            ScrollView(.horizontal) {
+                
+                LazyHGrid(rows: rows, alignment: .center) {
+                    ForEach(itemsG, id: \.self) { item in
+                        Image(systemName: "\(item).circle.fill")
+                            .font(.largeTitle)
+                    }
+                }
+                .frame(height: 150)
+            }
             
             GeometryReader{ _ in
                 
